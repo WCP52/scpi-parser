@@ -111,12 +111,19 @@ extern "C" {
         char * data;
     };
     typedef struct _scpi_buffer_t scpi_buffer_t;
+    
+    struct _scpi_const_buffer_t {
+        size_t length;
+        size_t position;
+        const char * data;
+    };
+    typedef struct _scpi_const_buffer_t scpi_const_buffer_t;    
 
     struct _scpi_param_list_t {
         const scpi_command_t * cmd;
         const char * parameters;
         size_t length;
-        scpi_buffer_t cmd_raw;
+        scpi_const_buffer_t cmd_raw;
     };
     #define SCPI_CMD_LIST_END       {NULL, NULL, }
     typedef struct _scpi_param_list_t scpi_param_list_t;
@@ -164,7 +171,8 @@ extern "C" {
         SCPI_NUM_DOWN,
         SCPI_NUM_NAN,
         SCPI_NUM_INF,
-        SCPI_NUM_NINF
+        SCPI_NUM_NINF,
+        SCPI_NUM_AUTO
     };
     typedef enum _scpi_special_number_t scpi_special_number_t;
 
